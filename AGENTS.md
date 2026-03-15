@@ -124,6 +124,39 @@ tail -20 D:/workspace/open_code/telegram_bot.log
 - `/screenshot` - Take a screenshot of the current page.
 - `/closechrome` - Close the Chrome browser instance.
 
+## GitHub CLI Configuration
+
+- **Tool location**: C:\Program Files\GitHub CLI\gh.exe
+- **Authentication**: Uses GITHUB_TOKEN environment variable
+- **Installation**: winget install --id GitHub.cli -e --source winget
+- **Usage**: Direct GitHub repository management via CLI
+
+### Common Commands
+```bash
+# List all repositories
+"C:\Program Files\GitHub CLI\gh.exe" repo list
+
+# View repository details
+"C:\Program Files\GitHub CLI\gh.exe" repo view Shrey-211/opencode_configs
+
+# Create an issue
+"C:\Program Files\GitHub CLI\gh.exe" issue create --repo Shrey-211/opencode_configs --title "Title" --body "Body"
+
+# List issues
+"C:\Program Files\GitHub CLI\gh.exe" issue list --repo Shrey-211/opencode_configs
+
+# Create a pull request
+"C:\Program Files\GitHub CLI\gh.exe" pr create --repo Shrey-211/opencode_configs --title "PR Title" --body "PR Body"
+
+# View pull requests
+"C:\Program Files\GitHub CLI\gh.exe" pr list --repo Shrey-211/opencode_configs
+```
+
+### Environment Setup
+- **Token**: GITHUB_TOKEN environment variable (automatically used by gh CLI)
+- **Path**: C:\Program Files\GitHub CLI\gh.exe
+- **Authentication**: Automatic via environment variable
+
 ---
 
 
