@@ -1,0 +1,35 @@
+{
+  "name": "windows",
+  "description": "Control Windows system - apps, volume, brightness, wifi, dark mode, screenshots, and more",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "Action to perform",
+        "enum": ["open", "volume", "brightness", "wifi", "bluetooth", "darkmode", "screenshot", "sysinfo", "lock", "sleep", "shutdown", "restart"]
+      },
+      "app": {
+        "type": "string",
+        "description": "App name for 'open' action (code, chrome, spotify, discord, etc.)"
+      },
+      "level": {
+        "type": "integer",
+        "description": "Level for volume or brightness (0-100)"
+      },
+      "mute": {
+        "type": "boolean",
+        "description": "Mute or unmute for 'volume' action"
+      },
+      "enable": {
+        "type": "boolean",
+        "description": "Enable or disable for wifi/bluetooth/darkmode"
+      },
+      "filename": {
+        "type": "string",
+        "description": "Filename for screenshot"
+      }
+    },
+    "required": ["action"]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "speak",
+  "description": "Convert text to speech using Microsoft Edge TTS",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "text": {
+        "type": "string",
+        "description": "The text to convert to speech"
+      },
+      "voice": {
+        "type": "string",
+        "description": "The voice to use (default: en-US-AriaNeural)",
+        "default": "en-US-AriaNeural"
+      },
+      "rate": {
+        "type": "string",
+        "description": "Speech rate (e.g., '+10%' faster, '-10%' slower)",
+        "default": "+0%"
+      },
+      "volume": {
+        "type": "string",
+        "description": "Speech volume (e.g., '+10%' louder)",
+        "default": "+0%"
+      }
+    },
+    "required": ["text"]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "listen",
+  "description": "Convert speech to text using Google Speech Recognition",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "timeout": {
+        "type": "integer",
+        "description": "Maximum time to wait for speech to start (seconds)",
+        "default": 10
+      },
+      "phrase_limit": {
+        "type": "integer",
+        "description": "Maximum duration of speech to capture (seconds)",
+        "default": 5
+      },
+      "language": {
+        "type": "string",
+        "description": "Language code (e.g., en-US, hi-IN, es-ES)",
+        "default": "en-US"
+      }
+    }
+  }
+}

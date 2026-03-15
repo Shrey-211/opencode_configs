@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp"],
+      "enabled": true
+    },
+    "filesystem": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "D:/workspace", "C:/Users/Shrey"],
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+      "enabled": true
+    },
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+      "enabled": true
+    },
+    "scrapling": {
+      "type": "local",
+      "command": ["scrapling", "mcp"],
+      "enabled": true
+    },
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp@latest"],
+      "enabled": true
+    }
+  },
+  "skills": {
+    "paths": [
+      "find-skills",
+      "web-design-guidelines",
+      "vercel-react-best-practices",
+      "typescript-best-practices",
+      "bug-fix"
+    ]
+  }
+}
