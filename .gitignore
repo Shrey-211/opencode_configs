@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific - SENSITIVE DATA
+.env
+*.log
+telegram_bot_v2.log
+telegram_bot.log
+audit_log.txt
+
+# Project specific - Generated/Cache
+node_modules/
+package.json
+bun.lock
+__pycache__/
+*.pyc
+
+# Redis (if using local DB file)
+*.rdb
+
+# OpenCode specific
+.opencode/
+
+# YouTube documentation (excluded from git)
+YOUTUBE_VIDEO_PLAN.md
+DEMO_SCRIPT.md
+
+# Windows device files
+nul

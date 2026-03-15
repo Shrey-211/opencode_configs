@@ -1,0 +1,9 @@
+# Core Dependencies (Already Installed)
+# aiohttp, asyncio, beautifulsoup4, fastapi, google-generativeai, openai
+# playwright, python-dotenv, redis, selenium, telegram-bot, etc.
+
+# New Dependencies for Improvements
+arq==0.25.0
+redis==5.0.1
+python-dotenv==1.0.0
+aiosqlite==0.20.0  # For optional SQLite task queue backup

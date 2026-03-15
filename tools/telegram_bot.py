@@ -24,7 +24,8 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 
 TOOLS_DIR = "C:/Users/Shrey/.config/opencode/tools"
 
-TELEGRAM_TOKEN = "8783206801:AAFNPEoOdOcFVFbzjam4t8ZyLutiW1MaEdc"
+# Load token from environment or use default
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8783206801:AAFNPEoOdOcFVFbzjam4t8ZyLutiW1MaEdc")
 
 OPENCODE_BASE_URL = "http://localhost:4096"
 
