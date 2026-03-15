@@ -41,7 +41,7 @@ Add your custom rules and instructions below. These will be automatically loaded
 ## Telegram Bot (Remote Control + OpenCode AI)
 
 - **Bot username**: @Open_codebot
-- **Token**: 8783206801:AAFNPEoOdOcFVFbzjam4t8ZyLutiW1MaEdc
+- **Token**: Set via TELEGRAM_TOKEN environment variable in .env
 - **Tool location**: C:/Users/Shrey/.config/opencode/tools/telegram_bot.py
 - **Run**: python C:/Users/Shrey/.config/opencode/tools/telegram_bot.py
 - **Requires**: OpenCode server running on localhost:4096

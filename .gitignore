@@ -59,6 +59,7 @@ package.json
 bun.lock
 __pycache__/
 *.pyc
+tools/__pycache__/
 
 # Redis (if using local DB file)
 *.rdb

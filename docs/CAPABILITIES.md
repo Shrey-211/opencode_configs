@@ -149,7 +149,7 @@ run_tool("listen", {"timeout": 10, "language": "en-US"})
 **Location**: `C:\Users\Shrey\.config\opencode\tools\telegram_bot.py`
 
 **Bot Username**: `@Open_codebot`  
-**Token**: `8783206801:AAFNPEoOdOcFVFbzjam4t8ZyLutiW1MaEdc`
+**Token**: Set via `TELEGRAM_TOKEN` environment variable
 
 **AI Chat Commands**:
 - `/newchat` - Start new AI session
