@@ -52,3 +52,4 @@ echo {text: Hello World} | python tools/speak.py
 2. Install dependencies: `npm install`
 3. Start OpenCode server
 4. Start Telegram bot (optional)
+# Test commit
