@@ -43,17 +43,24 @@ Add your custom rules and instructions below. These will be automatically loaded
 - **Bot username**: @Open_codebot
 - **Token**: Set via TELEGRAM_TOKEN environment variable in .env
 - **Tool location**: C:/Users/Shrey/.config/opencode/tools/telegram_bot.py
-- **Run**: python C:/Users/Shrey/.config/opencode/tools/telegram_bot.py
+- **Integrated Bot (Recommended)**: C:/Users/Shrey/.config/opencode/tools/telegram_bot_v2.py
+- **Run**: python C:/Users/Shrey/.config/opencode/tools/telegram_bot_v2.py
 - **Requires**: OpenCode server running on localhost:4096
 - **Integration**: Uses OpenCode REST API for AI chat
 
-### AI Chat Commands
+### All Telegram Commands
+
+#### AI Chat
 - Just send a message → Chat with OpenCode AI (creates persistent session per user)
 - `/newchat` - Start a new chat session
 - `/clearchat` - Clear current session and start fresh
 - `/run <command>` - Run shell command via OpenCode
 
-### PC Control Commands
+#### Goal-Driven (NEW!)
+- `/goal <task>` - Tell AI a goal, it creates a plan and executes it
+- `/do <task>` - Execute a natural language task
+
+#### System Control
 - `/speak <text>` - Text to speech
 - `/sysinfo` - CPU, RAM, disk info
 - `/volume <0-100>` - Set volume
@@ -63,11 +70,89 @@ Add your custom rules and instructions below. These will be automatically loaded
 - `/power saver/balanced/performance` - Set power mode
 - `/lock` - Lock screen
 - `/screenshot` - Take screenshot
-- `/kill <process>` - Kill process
+- `/kill <process>` - Kill process (requires confirmation)
 - `/wifi on/off` - Toggle Wi-Fi
+
+#### Status & Monitoring (NEW!)
+- `/status` - Check system and service status
+- `/monitor` - Toggle system monitoring
+
+#### Spotify
 - `/search <song>` - Search Spotify
 
-- **Usage**: Message @Open_codebot from anywhere to control your PC and chat with AI
+### Security Layer (NEW!)
+- Dangerous commands (/kill, /lock, /wifi) require confirmation
+- User must reply with 'confirm' within 30 seconds
+- Chat ID validation for authorized users only
+- All sensitive configs in .env file (never commit to git)
+
+## Project Structure
+
+```
+C:\Users\Shrey\.config\opencode\
+├── agents/                    # Multi-agent system
+│   ├── __init__.py
+│   ├── planner.py           # Goal planning agent
+│   ├── executor.py         # Task execution agent
+│   └── observer.py         # Result validation agent
+├── multiagent/              # Agent coordination
+│   ├── __init__.py
+│   └── coordinator.py       # Orchestrates agents
+├── nlp/                     # Natural language processing
+│   ├── __init__.py
+│   └── task_parser.py      # Task parsing from natural language
+├── monitoring/              # System monitoring
+│   ├── __init__.py
+│   └── daemon.py           # Health check daemon (5-min intervals)
+├── utils/                   # Utility modules
+│   ├── __init__.py
+│   ├── config_loader.py    # Environment configuration
+│   ├── security.py         # Security layer & confirmations
+│   └── task_queue.py       # Arq + Redis task queue
+├── tools/                   # Bot and automation tools
+│   ├── telegram_bot.py     # Original bot
+│   ├── telegram_bot_v2.py  # Integrated bot (recommended)
+│   ├── speak.py           # Text-to-speech
+│   ├── listen.py          # Speech-to-text
+│   ├── selenium_tool.py   # Browser automation
+│   └── spotify.py         # Spotify control
+├── docs/                   # Documentation
+│   ├── CAPABILITIES.md
+│   ├── README_AUTONOMY.md
+│   ├── SETUP_GUIDE.md
+│   ├── FILE_STRUCTURE.md
+│   ├── YOUTUBE_VIDEO_PLAN.md
+│   └── DEMO_SCRIPT.md
+├── .env                    # Environment variables (NOT in git)
+├── example.env             # Template for users
+├── .gitignore              # Git exclusions
+├── opencode.json           # OpenCode config
+└── requirements.txt        # Python dependencies
+```
+
+## Multi-Agent System
+
+The system uses 4 specialized agents:
+
+1. **Planner Agent** (`agents/planner.py`)
+   - Takes high-level goals
+   - Creates step-by-step execution plans
+   - Returns structured task list
+
+2. **Executor Agent** (`agents/executor.py`)
+   - Executes individual tasks
+   - Handles command execution
+   - Returns execution results
+
+3. **Observer Agent** (`agents/observer.py`)
+   - Validates task results
+   - Checks for errors
+   - Provides feedback for retry
+
+4. **Coordinator** (`multiagent/coordinator.py`)
+   - Orchestrates the workflow
+   - Manages agent communication
+   - Handles error recovery
 
 ## How to Start Services
 
@@ -82,16 +167,16 @@ opencode serve
 # Verify: curl http://localhost:4096/global/health
 ```
 
-### Start Telegram Bot
+### Start Telegram Bot (Recommended: v2)
 ```bash
-# Start bot (requires OpenCode server running first)
+# Start integrated bot with all features
+python tools/telegram_bot_v2.py
+
+# Or original bot
 python tools/telegram_bot.py
 
-# Or with PowerShell
-powershell -Command "Start-Process python -ArgumentList 'C:/Users/Shrey/.config/opencode/tools/telegram_bot.py' -WindowStyle Hidden"
-
-# Check logs
-tail -20 D:/workspace/open_code/telegram_bot.log
+# Check status
+curl -s http://localhost:4096/global/health
 ```
 
 ### Quick Status Check
@@ -101,6 +186,19 @@ curl -s http://localhost:4096/global/health
 
 # Check bot logs
 tail -20 D:/workspace/open_code/telegram_bot.log
+```
+
+### Start System Monitoring (Optional)
+```bash
+python monitoring/daemon.py
+```
+
+### Start Redis (Optional - for task queue)
+```bash
+# Using Docker
+docker run -d -p 6379:6379 redis
+
+# Or install Redis locally on Windows
 ```
 
 ### Troubleshooting
@@ -156,12 +254,4 @@ tail -20 D:/workspace/open_code/telegram_bot.log
 - **Token**: GITHUB_TOKEN environment variable (automatically used by gh CLI)
 - **Path**: C:\Program Files\GitHub CLI\gh.exe
 - **Authentication**: Automatic via environment variable
-
-## YouTube Video Assets
-Reference files for recording the "OpenCode Autonomy" video:
-- **Plan**: `C:\Users\Shrey\.config\opencode\YOUTUBE_VIDEO_PLAN.md`
-- **Script**: `C:\Users\Shrey\.config\opencode\DEMO_SCRIPT.md`
-
----
-
 
