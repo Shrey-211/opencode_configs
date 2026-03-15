@@ -157,6 +157,11 @@ tail -20 D:/workspace/open_code/telegram_bot.log
 - **Path**: C:\Program Files\GitHub CLI\gh.exe
 - **Authentication**: Automatic via environment variable
 
+## YouTube Video Assets
+Reference files for recording the "OpenCode Autonomy" video:
+- **Plan**: `C:\Users\Shrey\.config\opencode\YOUTUBE_VIDEO_PLAN.md`
+- **Script**: `C:\Users\Shrey\.config\opencode\DEMO_SCRIPT.md`
+
 ---
 
 
