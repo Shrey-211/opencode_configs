@@ -45,6 +45,13 @@ Thumbs.db
 telegram_bot_v2.log
 telegram_bot.log
 audit_log.txt
+tools/telegram_bot.log
+
+# Spotify sensitive files
+tools/.cache
+tools/spotify.py
+tools/spotify.json
+tools/spotify_token.json
 
 # Project specific - Generated/Cache
 node_modules/
