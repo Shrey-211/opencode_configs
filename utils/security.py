@@ -25,19 +25,12 @@ class SecurityManager:
     
     def is_command_allowed(self, chat_id: str, command: str) -> tuple[bool, Optional[str]]:
         """
-        Check if a command is allowed for a chat ID
-        
-        Returns:
-            (is_allowed, reason_if_denied)
+        Check if a command is allowed for a chat ID.
+        Only checks the whitelist — confirmation is handled separately by
+        ``requires_confirmation`` so the caller can offer a UI prompt.
         """
-        # Check chat ID whitelist
         if not config.is_allowed_chat(chat_id):
             return False, "Chat ID not in allowed list"
-        
-        # Check if command requires confirmation
-        if config.requires_confirmation(command):
-            return False, "Command requires confirmation"
-        
         return True, None
     
     def requires_confirmation(self, command: str) -> bool:

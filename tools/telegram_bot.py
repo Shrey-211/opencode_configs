@@ -149,8 +149,6 @@ class OpenCodeClient:
                     text_parts.append(f"[Tool: {part.get('name', 'unknown')}]")
                 elif part_type == "tool_result":
                     text_parts.append(f"[Tool Result]")
-                elif part_type == "reasoning":
-                    text_parts.append(f"[Reasoning: {part.get('text', '')[:100]}]")
             
             logger.info(f"DEBUG: text_parts: {text_parts}")
             full_text = "\n".join(text_parts)

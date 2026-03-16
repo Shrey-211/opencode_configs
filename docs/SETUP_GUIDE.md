@@ -1,127 +1,104 @@
-# Setup Guide - OpenCode Autonomy System v2
+# Setup Guide
 
 ## Prerequisites
 
-1. **Python 3.8+**
-2. **Redis Server** (for task queue)
-3. **OpenCode** installed and configured
-4. **Telegram Bot Token** (from @BotFather)
+- Python 3.10+
+- OpenCode installed and on PATH
+- Telegram Bot token (from [@BotFather](https://t.me/BotFather))
 
-## Quick Start
+## Step 1: Configure Environment
 
-### Step 1: Configure Environment
+Copy the template and fill in your token:
 
-1. Copy `example.env` to `.env`:
-   ```bash
-   copy example.env .env
-   ```
+```bash
+copy example.env .env
+```
 
-2. Edit `.env` with your values:
-   ```env
-   TELEGRAM_TOKEN=your_telegram_bot_token_here
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
+Edit `.env`:
 
-### Step 2: Install Dependencies
+```env
+TELEGRAM_TOKEN=your_telegram_bot_token_here
+
+# Optional: restrict to specific Telegram chat IDs (comma-separated)
+# ALLOWED_CHAT_IDS=123456789,987654321
+```
+
+## Step 2: Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 3: Start Redis
-
-```bash
-# Windows (if installed via Chocolatey)
-redis-server
-
-# Or download from: https://github.com/tporadowski/redis/releases
-```
-
-### Step 4: Start OpenCode Server
+## Step 3: Start OpenCode Server
 
 ```bash
 opencode serve
 ```
 
 Verify it's running:
+
 ```bash
 curl http://localhost:4096/global/health
 ```
 
-### Step 5: Start Telegram Bot
+## Step 4: Start Telegram Bot
+
+**Option A** -- Use the restart script (recommended, runs in background):
+
+```bash
+powershell -ExecutionPolicy Bypass -File restart_bot.ps1
+```
+
+**Option B** -- Run directly (foreground, useful for debugging):
 
 ```bash
 python tools/telegram_bot_v2.py
 ```
 
-### Step 6: Test the System
+## Step 5: Test
 
-```bash
-python utils/test_integration.py
-```
+Open Telegram, find `@Open_codebot`, and send `/start`.
 
-## Configuration Details
+## Configuration Reference
 
-### Telegram Bot Token
+All config lives in `.env`. See `example.env` for the full list.
 
-1. Open Telegram and search for `@BotFather`
-2. Send `/newbot` command
-3. Follow instructions to create a bot
-4. Copy the token provided
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `TELEGRAM_TOKEN` | Yes | -- | Bot token from @BotFather |
+| `ALLOWED_CHAT_IDS` | No | *(empty = all)* | Comma-separated chat ID whitelist |
+| `WORKSPACE_PATH` | No | `D:/workspace/open_code` | Default working directory |
+| `REQUIRE_CONFIRMATION` | No | `true` | Require confirmation for dangerous commands |
+| `DANGEROUS_COMMANDS` | No | `shutdown,restart,kill,rm,format,mkfs` | Keywords that trigger confirmation |
 
-### AI API Keys (Optional)
-
-- **Google Gemini**: https://makersuite.google.com/app/apikey
-- **OpenAI**: https://platform.openai.com/api-keys
-
-### Redis Configuration
-
-Default settings work for local development:
-- Host: `localhost`
-- Port: `6379`
-- Database: `0`
-
-## File Structure Overview
-
-```
-opencode/
-├── utils/           # Configuration, security, task queue
-├── agents/          # Multi-agent system
-├── multiagent/      # Agent coordination
-├── nlp/             # Natural language processing
-├── monitoring/      # System monitoring
-├── tools/           # Telegram bot and tools
-├── docs/            # Documentation
-└── .env             # Your configuration (NOT in git)
-```
-
-## Common Issues
-
-### "Redis connection failed"
-- Ensure Redis is running: `redis-cli ping`
-- Check `REDIS_HOST` and `REDIS_PORT` in `.env`
+## Troubleshooting
 
 ### "OpenCode server not running"
-- Start with: `opencode serve`
-- Verify with: `curl http://localhost:4096/global/health`
 
-### "Bot not responding"
-- Check token in `.env`
-- Ensure bot is running in background
-- Check `telegram_bot_v2.log` for errors
+Start the server first:
 
-## Next Steps
+```bash
+opencode serve
+curl http://localhost:4096/global/health
+```
 
-1. Read `docs/README_AUTONOMY.md` for comprehensive documentation
-2. Try commands in Telegram:
-   - `/start` - Welcome message
-   - `/help` - Command list
-   - `/goal Open browser and search for Python` - Test goal execution
-3. Review `docs/FILE_STRUCTURE.md` for organization details
+### Telegram 409 conflict error
 
-## Security Notes
+Another bot instance is running. Kill all Python processes and restart:
 
-- Never commit `.env` file to version control
-- Use environment variables for all secrets
-- Enable command confirmation for dangerous operations
-- Restrict bot access with `ALLOWED_CHAT_IDS`
+```bash
+powershell -Command "Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force"
+powershell -ExecutionPolicy Bypass -File restart_bot.ps1
+```
+
+### Bot not responding
+
+Check the log:
+
+```bash
+type C:\Users\Shrey\.config\opencode\telegram_bot_v2.log
+```
+
+### Permission denied on commands
+
+Verify your Telegram chat ID is in `ALLOWED_CHAT_IDS` (or leave it empty to allow all).
