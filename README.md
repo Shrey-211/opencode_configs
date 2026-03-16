@@ -5,6 +5,25 @@
 
 A production-ready Telegram bot that gives you remote control of your PC and AI chat powered by OpenCode.
 
+## Self-Configure (One-Prompt Setup)
+
+Fresh OpenCode install? Paste this into OpenCode and it will configure itself from this repo:
+
+> See [docs/SELF_CONFIGURE_PROMPT.md](docs/SELF_CONFIGURE_PROMPT.md) for the full prompt.
+
+**Prerequisites**: OpenCode, Node.js 18+, Python 3.10+, Git
+
+**What you get after setup**:
+- 6 MCP servers (Playwright, Filesystem, Memory, GitHub, Scrapling, Context7)
+- 5 skills (find-skills, web-design-guidelines, vercel-react, typescript, bug-fix)
+- Custom tools: text-to-speech, speech-to-text, Windows system control, Chrome automation
+- Production Telegram bot with AI chat, remote shell, rate limiting, and graceful shutdown
+- AGENTS.md with pre-configured agent behavior
+
+**What you provide**: Your OS, home directory, workspace path, and API tokens (Telegram, GitHub, Spotify -- all optional except Telegram).
+
+---
+
 ## What It Does
 
 - **AI Chat** -- Send any message to chat with OpenCode AI via Telegram (persistent sessions per user)
